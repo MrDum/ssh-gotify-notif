@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e # Exit the script if any command fails
+
+# Download the raw text file using curl
+if ! curl https://gist.githubusercontent.com/MrDum/57c09753da62749d0b781a47f2d4b23e/raw/96073fd2d4ab347e66ff1a3e7f3ea0c52f3d5c2b/ssh-gotify-notif -o /usr/local/bin/ssh-gotify-notif; then
+    echo "Download failed"
+    exit 1
+fi
+
+# Make the file executable
+if ! chmod +x /usr/local/bin/ssh-gotify-notif; then
+    echo "Failed to make the file executable"
+    exit 1
+fi
+
+# Add the line to the end of the file
+if ! echo 'session optional pam_exec.so /usr/local/bin/ssh-gotify-notif' >> /etc/pam.d/sshd; then
+    echo "Failed to append to the file"
+    exit 1
+fi
+
+echo "The script executed successfully"
