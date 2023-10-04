@@ -16,7 +16,7 @@ sed -i "s/gotify-app-token/${gotify_app_token}/g" /usr/local/bin/ssh-gotify-noti
 
 Gotify_URL='https://gotifyc.reszt.xyz'
 Gotify_URL_old='https://example.tld/gotify'
-sed -i "s/${Gotify_URL_old}/${Gotify_URL}/g" /usr/local/bin/ssh-gotify-notif
+sed -i "s@${Gotify_URL_old}@${Gotify_URL}@g" /usr/local/bin/ssh-gotify-notif
 
 # Make the file executable
 if ! chmod +x /usr/local/bin/ssh-gotify-notif; then
